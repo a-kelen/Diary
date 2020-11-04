@@ -9,51 +9,90 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LifecycleObserver
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.diary.databinding.ActivityMainBinding
+import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LifecycleObserver {
     companion object{
         const val EXTRA_MESSAGE = "EXTRA_MESSAGE"
     }
-    lateinit var edit_message: EditText
-    lateinit var edit_button: EditText
-    lateinit var long_button: Button
+
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var timer: Timer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        edit_message= findViewById<EditText>(R.id.edit_message)
-        edit_button= findViewById<EditText>(R.id.edit_button)
-        long_button= findViewById<Button>(R.id.longButton)
+        Timber.i("onCreate called")
+        timer = Timer(this.lifecycle)
+        if(savedInstanceState!= null) {
+//            binding.editMessage.setText(savedInstanceState.getString(ARG_PARAM1))
+            Timber.i("Data restored2 :" + savedInstanceState.getString("text"))
+        }
+        @Suppress("USUSED_VARIABLE")
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        drawerLayout = binding.drawerLayout
+        val navController = this.findNavController(R.id.NavHostFragment)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, navController)
 
-        long_button.setOnLongClickListener(View.OnLongClickListener {
-            longButton()
-        })
-        edit_message.setOnClickListener(View.OnClickListener {
-            edit_message.text.clear()
-        })
-        edit_button.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                long_button.text = edit_button.text
-            }
+    }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.NavHostFragment)
+        return NavigationUI.navigateUp(navController, drawerLayout)
+    }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
+    override fun onStart() {
+        super.onStart()
+        Timber.i("onStart called")
     }
-    fun sendMessage(view: View) {
-        val message: String = edit_message.text.toString()
-        val intent: Intent = Intent(this, DisplayMessageActivity::class.java)
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+
+    override fun onResume() {
+        super.onResume()
+        Timber.i("onResume called")
     }
-     fun longButton() : Boolean  {
-        Toast.makeText(this@MainActivity, edit_button.text, Toast.LENGTH_SHORT).show()
-         return true;
+
+    override fun onStop() {
+        super.onStop()
+        Timber.i("onStop called")
+
     }
-    fun toCreateButton(view: View) {
-        val intent: Intent = Intent(this, CreateNoteActivity::class.java)
-        startActivity(intent);
+
+    override fun onPostResume() {
+        super.onPostResume()
+        Timber.i("onPostResume called")
     }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.i("onPause called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.i("onDestroy Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Timber.i("onRestart called")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("text" , "To save")
+        Timber.i("onSaveInstanceState called")
+        super.onSaveInstanceState(outState)
+
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Timber.i("onRestoreInstanceState Called")
+    }
+
 }

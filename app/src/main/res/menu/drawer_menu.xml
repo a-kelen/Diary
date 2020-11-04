@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Home" />
+    <item
+        android:id="@+id/secondFragment"
+        android:title="Second" />
+    <item
+        android:id="@+id/thirdFragment"
+        android:title="Third" />
+    <item
+        android:id="@+id/aboutFragment"
+        android:title="About" />
+    <item
+        android:id="@+id/rulesFragment"
+        android:title="Rules" />
+</menu>
