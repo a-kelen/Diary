@@ -22,7 +22,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.diary.database.DiaryDatabase
 import com.diary.databinding.FragmentHomeBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
 import timber.log.Timber
 
@@ -49,7 +51,11 @@ class HomeFragment : Fragment(), LifecycleObserver, ItemClickListerner {
         // Inflate the layout for this fragment
         Timber.i("onCreateView called")
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        var application = requireNotNull(this.activity).application
+        var dataSource = DiaryDatabase.getInstance(application).noteDao
+        val viewModelFactory = HomeVMFactory(dataSource, application)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(HomeViewModel::class.java)
         val adapter : NoteAdapter = NoteAdapter(this)
 
         binding.notes.layoutManager = LinearLayoutManager(this.context)
@@ -64,10 +70,20 @@ class HomeFragment : Fragment(), LifecycleObserver, ItemClickListerner {
         })
         viewModel.event.observe(this.viewLifecycleOwner, Observer { isUpdated ->
             if(isUpdated) {
-                Toast.makeText(this.activity, "Data is updated", Toast.LENGTH_SHORT).show()
                 viewModel.reloadEvent()
             }
         })
+        viewModel.showSnackBarEvent.observe(this.viewLifecycleOwner, Observer {
+            if (it == true) {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    "List is cleared",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                viewModel.doneShowingSnackbar()
+            }
+        })
+        binding.setLifecycleOwner(this)
         return  binding.root
     }
 

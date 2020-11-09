@@ -18,7 +18,12 @@
             android:layout_height="match_parent"
             android:text="Add"
             android:onClick="@{() -> viewModel.addElement()}"/>
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Clear"
+            android:onClick="@{() -> viewModel.clearNotes()}"
+            android:enabled="@{viewModel.clearButtonVisible}"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notes"
             android:layout_width="match_parent"

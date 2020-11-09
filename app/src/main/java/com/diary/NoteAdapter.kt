@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.diary.database.Note
 
 class NoteAdapter(val itemClickListerner: ItemClickListerner) : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
-    var data= listOf<String>()
+    var data= listOf<Note>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -30,11 +31,11 @@ class NoteAdapter(val itemClickListerner: ItemClickListerner) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
-        val value : String = data.get(position)
-        holder.textView.text = value
-        holder.textView.setOnClickListener {
-            itemClickListerner.OnClick(value)
-        }
+        val value : Note = data.get(position)
+        holder.textView.text = value.Title
+//        holder.textView.setOnClickListener {
+//            itemClickListerner.OnClick(value)
+//        }
     }
 }
 
