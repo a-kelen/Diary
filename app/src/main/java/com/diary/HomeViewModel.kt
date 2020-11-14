@@ -35,7 +35,7 @@ class HomeViewModel(
         get() = _showSnackbarEvent
 
     fun addElement() {
-        var n = Note(Title = "Title 1", Content = "Content")
+        var n = Note(title = "Title 1", content = "Content")
         viewModelScope.launch {
             insertNote(n)
         }

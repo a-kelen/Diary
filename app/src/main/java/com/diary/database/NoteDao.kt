@@ -13,7 +13,7 @@ interface NoteDao {
     @Update
     fun update(note: Note)
 
-    @Query("SELECT * from note_table WHERE Id = :key")
+    @Query("SELECT * from note_table WHERE noteId = :key")
     fun get(key: Long): Note?
 
     @Query("DELETE FROM note_table")

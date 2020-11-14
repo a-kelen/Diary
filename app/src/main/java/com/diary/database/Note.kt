@@ -7,11 +7,16 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "note_table")
 data class Note (
     @PrimaryKey(autoGenerate = true)
-    var Id : Long = 0L,
+    val noteId : Long = 0L,
     @ColumnInfo(name = "title")
-    var Title : String,
+    val title : String?,
     @ColumnInfo(name = "content")
-    var Content : String?,
+    val content : String?,
     @ColumnInfo(name = "created")
-    val Created: Long = System.currentTimeMillis()
+    val created: Long = System.currentTimeMillis(),
+    @ColumnInfo(name = "photo")
+    val photo : String? = null,
+    @ColumnInfo(name = "emotion")
+    val name : Int = -1,
+    val folderId : Long = 0L
 )

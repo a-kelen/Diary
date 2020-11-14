@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diary.database.DiaryDatabase
 import com.diary.databinding.FragmentHomeBinding
@@ -65,7 +66,7 @@ class HomeFragment : Fragment(), LifecycleObserver, ItemClickListerner {
 
         viewModel.notes.observe(this.viewLifecycleOwner, Observer { newList ->
             newList?.let {
-                adapter.data = newList
+                adapter.submitList(newList )
             }
         })
         viewModel.event.observe(this.viewLifecycleOwner, Observer { isUpdated ->
@@ -83,6 +84,9 @@ class HomeFragment : Fragment(), LifecycleObserver, ItemClickListerner {
                 viewModel.doneShowingSnackbar()
             }
         })
+        binding.createBtn.setOnClickListener{
+            it.findNavController().navigate(R.id.action_homeFragment_to_createNoteFragment)
+        }
         binding.setLifecycleOwner(this)
         return  binding.root
     }
@@ -91,13 +95,6 @@ class HomeFragment : Fragment(), LifecycleObserver, ItemClickListerner {
         Toast.makeText(this.activity, "Data : " + str, Toast.LENGTH_SHORT).show()
         var b = bundleOf("element" to str)
         Navigation.findNavController(binding.notes).navigate(R.id.action_homeFragment_to_noteDetailsFragment, b)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        if(savedInstanceState!= null) {
-            Timber.i("onActivityCreated :" + savedInstanceState.getString(ARG_PARAM1))
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

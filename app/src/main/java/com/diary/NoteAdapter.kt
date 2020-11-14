@@ -1,44 +1,50 @@
 package com.diary
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.diary.database.Note
+import androidx.recyclerview.widget.ListAdapter
+import com.diary.databinding.NoteItemBinding
 
-class NoteAdapter(val itemClickListerner: ItemClickListerner) : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
-    var data= listOf<Note>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-    class NoteHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        lateinit var textView : TextView
+class NoteAdapter(
+    val itemClickListerner: ItemClickListerner) : ListAdapter<Note, NoteAdapter.NoteHolder>(NoteDiffCallback()) {
+
+    class NoteHolder(val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        lateinit var title : TextView
+        lateinit var content : TextView
         init {
-            textView = itemView.findViewById(R.id.noteItemTextView)
+            title = binding.noteItemTitle
+            content = binding.noteItemContent
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
-        var item : View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.note_item, parent, false)
-        return  NoteHolder(item)
-    }
-
-    override fun getItemCount(): Int {
-        return data.size
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = NoteItemBinding.inflate(layoutInflater, parent, false)
+        return  NoteHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
-        val value : Note = data.get(position)
-        holder.textView.text = value.Title
+        val value : Note = getItem(position)
+        holder.binding.note = value
+        holder.binding.executePendingBindings()
+
+//        holder.title.text = value.title
+//        holder.content.text = value.content
 //        holder.textView.setOnClickListener {
 //            itemClickListerner.OnClick(value)
 //        }
     }
 }
+class NoteDiffCallback : DiffUtil.ItemCallback<Note>() {
+    override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+        return oldItem == newItem
+    }
 
-//class NoteListener(val clickListener: (noteId: Long) -> Unit) {
-//    fun onClick(note: String) = clickListener()
-//}
+    override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+        return oldItem.noteId == newItem.noteId
+    }
+}

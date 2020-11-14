@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_noteDetailsFragment"
             app:destination="@id/noteDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createNoteFragment"
+            app:destination="@id/createNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
@@ -49,4 +52,9 @@
             app:argType="string"
             android:defaultValue="default" />
     </fragment>
+    <fragment
+        android:id="@+id/createNoteFragment"
+        android:name="com.diary.CreateNoteFragment"
+        android:label="Create Note"
+        tools:layout="@layout/create_note_fragment" />
 </navigation>

@@ -8,26 +8,30 @@
             name="viewModel"
             type="com.diary.HomeViewModel" />
     </data>
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Add"
-            android:onClick="@{() -> viewModel.addElement()}"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Clear"
-            android:onClick="@{() -> viewModel.clearNotes()}"
-            android:enabled="@{viewModel.clearButtonVisible}"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:contentDescription="asd"
+            app:fabCustomSize="80dp"
+            android:backgroundTint="@color/cardview_light_background"
+            />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
