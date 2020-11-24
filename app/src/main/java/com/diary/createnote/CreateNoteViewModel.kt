@@ -1,4 +1,4 @@
-package com.diary
+package com.diary.createnote
 
 import android.app.Application
 import androidx.lifecycle.*

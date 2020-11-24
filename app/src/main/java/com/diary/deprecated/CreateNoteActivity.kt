@@ -1,13 +1,12 @@
-package com.diary
+package com.diary.deprecated
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
-import kotlinx.android.synthetic.main.activity_create_note.*
+import com.diary.R
 
 class CreateNoteActivity : AppCompatActivity() {
 

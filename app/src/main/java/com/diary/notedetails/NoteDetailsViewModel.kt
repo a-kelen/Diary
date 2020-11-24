@@ -1,4 +1,4 @@
-package com.diary
+package com.diary.notedetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

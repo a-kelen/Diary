@@ -1,10 +1,12 @@
-package com.diary
+package com.diary.deprecated
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.diary.MainActivity
+import com.diary.R
 
 class DisplayMessageActivity : AppCompatActivity() {
 

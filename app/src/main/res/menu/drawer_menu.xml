@@ -5,6 +5,9 @@
         android:id="@+id/homeFragment"
         android:title="Home" />
     <item
+        android:id="@+id/archiveFragment"
+        android:title="Archive" />
+    <item
         android:id="@+id/secondFragment"
         android:title="Second" />
     <item
@@ -16,4 +19,5 @@
     <item
         android:id="@+id/rulesFragment"
         android:title="Rules" />
+
 </menu>

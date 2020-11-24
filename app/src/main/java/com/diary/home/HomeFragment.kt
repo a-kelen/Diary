@@ -1,32 +1,24 @@
-package com.diary
+package com.diary.home
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.diary.notedetails.NoteAdapter
+import com.diary.R
 import com.diary.database.DiaryDatabase
 import com.diary.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_home.*
 import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,7 +26,8 @@ import timber.log.Timber
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class HomeFragment : Fragment(), LifecycleObserver, ItemClickListerner {
+class HomeFragment : Fragment(), LifecycleObserver,
+    ItemClickListerner {
 
     lateinit var viewModel: HomeViewModel
 
@@ -51,13 +44,16 @@ class HomeFragment : Fragment(), LifecycleObserver, ItemClickListerner {
     ): View? {
         // Inflate the layout for this fragment
         Timber.i("onCreateView called")
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_home,container,false)
         var application = requireNotNull(this.activity).application
         var dataSource = DiaryDatabase.getInstance(application).noteDao
-        val viewModelFactory = HomeVMFactory(dataSource, application)
+        val viewModelFactory =
+            HomeVMFactory(dataSource, application)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(HomeViewModel::class.java)
-        val adapter : NoteAdapter = NoteAdapter(this)
+        val adapter : NoteAdapter =
+            NoteAdapter(this)
 
         binding.notes.layoutManager = LinearLayoutManager(this.context)
         binding.notes.setHasFixedSize(true)

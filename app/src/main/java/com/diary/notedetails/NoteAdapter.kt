@@ -1,4 +1,4 @@
-package com.diary
+package com.diary.notedetails
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.diary.database.Note
 import androidx.recyclerview.widget.ListAdapter
+import com.diary.home.ItemClickListerner
 import com.diary.databinding.NoteItemBinding
 
 class NoteAdapter(
-    val itemClickListerner: ItemClickListerner) : ListAdapter<Note, NoteAdapter.NoteHolder>(NoteDiffCallback()) {
+    val itemClickListerner: ItemClickListerner
+) : ListAdapter<Note, NoteAdapter.NoteHolder>(
+    NoteDiffCallback()
+) {
 
     class NoteHolder(val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
         lateinit var title : TextView
@@ -24,7 +28,7 @@ class NoteAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = NoteItemBinding.inflate(layoutInflater, parent, false)
-        return  NoteHolder(binding)
+        return NoteHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {

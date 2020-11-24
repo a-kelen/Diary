@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.diary.HomeFragment"
+        android:name="com.diary.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_createNoteFragment"
             app:destination="@id/createNoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_archiveFragment"
+            app:destination="@id/archiveFragment" />
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
@@ -44,7 +47,7 @@
         tools:layout="@layout/fragment_rules" />
     <fragment
         android:id="@+id/noteDetailsFragment"
-        android:name="com.diary.NoteDetailsFragment"
+        android:name="com.diary.notedetails.NoteDetailsFragment"
         android:label="fragment_note_details"
         tools:layout="@layout/fragment_note_details" >
         <argument
@@ -54,7 +57,12 @@
     </fragment>
     <fragment
         android:id="@+id/createNoteFragment"
-        android:name="com.diary.CreateNoteFragment"
+        android:name="com.diary.createnote.CreateNoteFragment"
         android:label="Create Note"
         tools:layout="@layout/create_note_fragment" />
+    <fragment
+        android:id="@+id/archiveFragment"
+        android:name="com.diary.archive.ArchiveFragment"
+        android:label="Archive"
+        tools:layout="@layout/archive_fragment" />
 </navigation>

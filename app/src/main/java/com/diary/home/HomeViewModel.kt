@@ -1,9 +1,6 @@
-package com.diary
+package com.diary.home
 
 import android.app.Application
-import android.opengl.Visibility
-import android.util.Log
-import android.widget.Button
 import androidx.lifecycle.*
 import com.diary.database.Note
 import com.diary.database.NoteDao
@@ -21,7 +18,12 @@ class HomeViewModel(
     val  event : LiveData<Boolean>
         get() = _event
 
+    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+    val showSnackBarEvent: LiveData<Boolean>
+        get() = _showSnackbarEvent
+
     lateinit var initList : ArrayList<Note>
+
     init {
         initList = ArrayList()
     }
@@ -30,10 +32,6 @@ class HomeViewModel(
         it?.isNotEmpty()
     }
 
-    private var _showSnackbarEvent = MutableLiveData<Boolean>()
-    val showSnackBarEvent: LiveData<Boolean>
-        get() = _showSnackbarEvent
-
     fun addElement() {
         var n = Note(title = "Title 1", content = "Content")
         viewModelScope.launch {
@@ -41,24 +39,27 @@ class HomeViewModel(
         }
         this._event.value = true
     }
-    private suspend fun insertNote(n: Note) {
-        return withContext(Dispatchers.IO) {
-            db.insert(n)
 
-        }
+    private suspend fun insertNote(n: Note) {
+//        return withContext(Dispatchers.IO) {
+//            db.insert(n)
+//        }
     }
+
     fun clearNotes() {
         viewModelScope.launch {
             clear()
         }
         _showSnackbarEvent.value = true
     }
+
     private suspend fun clear()
     {
         return withContext(Dispatchers.IO) {
             db.clear()
         }
     }
+
     fun reloadEvent() {
         this._event.value = false
     }
@@ -66,6 +67,7 @@ class HomeViewModel(
     override fun onCleared() {
         super.onCleared()
     }
+
     fun doneShowingSnackbar() {
         _showSnackbarEvent.value = false
     }

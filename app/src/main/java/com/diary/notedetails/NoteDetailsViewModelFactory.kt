@@ -1,4 +1,4 @@
-package com.diary
+package com.diary.notedetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.diary
+package com.diary.tabs
 
 import android.widget.Switch
 import androidx.fragment.app.Fragment

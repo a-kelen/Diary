@@ -1,4 +1,4 @@
-package com.diary
+package com.diary.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

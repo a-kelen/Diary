@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".NoteDetailsFragment">
+    tools:context=".notedetails.NoteDetailsFragment">
     <data>
         <variable
             name="viewModel"
-            type="com.diary.NoteDetailsViewModel" />
+            type="com.diary.notedetails.NoteDetailsViewModel" />
     </data>
     <LinearLayout
         android:orientation="horizontal"

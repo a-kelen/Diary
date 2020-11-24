@@ -1,4 +1,4 @@
-package com.diary
+package com.diary.notedetails
 
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.core.content.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.diary.databinding.FragmentHomeBinding
+import com.diary.R
 import com.diary.databinding.FragmentNoteDetailsBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,7 +38,8 @@ class NoteDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_note_details,container,false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_note_details,container,false)
         var res = arguments?.getString("element") ?: "Empty"
         viewModelFactory = NoteDetailsViewModelFactory(res)
         viewModel = ViewModelProviders.of(this, viewModelFactory)
