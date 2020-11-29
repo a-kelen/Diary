@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.diary.R
-import com.diary.database.Note
+import com.diary.domain.Note
 import java.text.SimpleDateFormat
 import java.util.*
 

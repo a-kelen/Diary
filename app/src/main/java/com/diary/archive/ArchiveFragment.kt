@@ -32,7 +32,7 @@ class ArchiveFragment : Fragment(), ItemClickListerner {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.archive_fragment,container,false)
         var application = requireNotNull(this.activity).application
-        var dataSource = DiaryDatabase.getInstance(application).noteDao
+        var dataSource = DiaryDatabase.getInstance(application).archiveDao
         val viewModelFactory =
             ArchiveVMFactory(dataSource, application)
         viewModel = ViewModelProvider(this, viewModelFactory)
@@ -46,7 +46,7 @@ class ArchiveFragment : Fragment(), ItemClickListerner {
         binding.archiveNotes.adapter = adapter
         viewModel.notes.observe(this.viewLifecycleOwner, Observer { newList ->
             newList?.let {
-                adapter.submitList(newList )
+                adapter.submitList(newList)
             }
         })
 

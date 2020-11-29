@@ -4,24 +4,24 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities = [Note::class, Tag::class, Folder::class], version = 2, exportSchema = false)
+@Database(entities = [Note::class, Tag::class, Folder::class, ArchiveNote::class], version = 3, exportSchema = false)
 abstract class DiaryDatabase : RoomDatabase() {
     abstract val noteDao : NoteDao
+    abstract val archiveDao : NoteArchiveDao
     companion object {
         @Volatile
-        private var INSTANCE : DiaryDatabase? = null
+        private lateinit var INSTANCE : DiaryDatabase
         fun getInstance(context: Context) : DiaryDatabase {
-            synchronized(this) {
-                var inst = INSTANCE
-                if (inst == null) {
-                    inst = Room.databaseBuilder(
+            synchronized(DiaryDatabase::class.java) {
+
+                if (! ::INSTANCE.isInitialized) {
+                    INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         DiaryDatabase::class.java,
                         "diary_database"
                     ).fallbackToDestructiveMigration().build()
-                    INSTANCE = inst
                 }
-                return inst
+                return INSTANCE
             }
         }
     }

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.diary.database.Note
+import com.diary.domain.Note
 import androidx.recyclerview.widget.ListAdapter
 import com.diary.home.ItemClickListerner
 import com.diary.databinding.NoteItemBinding

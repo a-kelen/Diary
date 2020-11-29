@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.diary.domain.Note
 
-@Entity(tableName = "note_table")
-data class Note (
+@Entity(tableName = "archive_note_table")
+data class ArchiveNote (
     @PrimaryKey(autoGenerate = true)
     val noteId : Long = 0L,
     @ColumnInfo(name = "title")
@@ -21,7 +21,7 @@ data class Note (
     val emotion : Int = -1,
     val folderId : Long = 0L
 )
-fun List<com.diary.database.Note>.asDomainModel(): List<Note> {
+fun List<ArchiveNote>.asDomainModel(): List<Note> {
     return map {
         Note(
             noteId = it.noteId,

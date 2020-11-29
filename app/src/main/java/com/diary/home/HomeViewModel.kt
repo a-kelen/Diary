@@ -2,18 +2,20 @@ package com.diary.home
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.diary.database.Note
 import com.diary.database.NoteDao
+import com.diary.database.asDomainModel
+import com.diary.domain.Note
 import kotlinx.coroutines.*
+import timber.log.Timber
 
 class HomeViewModel(
     val db : NoteDao,
     application: Application
 ) : AndroidViewModel(application) {
-    private var _notes = db.getAllNotes()
-    val notes: LiveData<List<Note>>
-        get() = _notes
-
+    val notes = Transformations.map(db.getAllNotes()) {
+        Timber.i("Notes count: " + it.count().toString())
+        it.asDomainModel()
+    }
     private val _event = MutableLiveData<Boolean>()
     val  event : LiveData<Boolean>
         get() = _event
@@ -28,19 +30,19 @@ class HomeViewModel(
         initList = ArrayList()
     }
 
-    val clearButtonVisible = Transformations.map(_notes) {
+    val clearButtonVisible = Transformations.map(notes) {
         it?.isNotEmpty()
     }
 
     fun addElement() {
-        var n = Note(title = "Title 1", content = "Content")
+        var n = com.diary.database.Note(title = "Title 1", content = "Content")
         viewModelScope.launch {
             insertNote(n)
         }
         this._event.value = true
     }
 
-    private suspend fun insertNote(n: Note) {
+    private suspend fun insertNote(n: com.diary.database.Note) {
 //        return withContext(Dispatchers.IO) {
 //            db.insert(n)
 //        }
