@@ -21,6 +21,10 @@ class TabPagerAdapter(private var adapter: FragmentManager) : FragmentPagerAdapt
         return frTitleList.get(position)
     }
     fun addFragment(fr: Fragment, title: String) {
+        if (frTitleList.contains(title)) {
+            frTitleList.clear()
+            frList.clear()
+        }
         frList.add(fr)
         frTitleList.add(title)
     }

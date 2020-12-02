@@ -29,6 +29,23 @@ fun List<com.diary.database.Note>.asDomainModel(): List<Note> {
             content = it.content,
             created = it.created,
             photo = it.photo,
-            emotion = it.emotion)
+            emotion = it.emotion,
+            folderName = "Default")
+    }
+}
+
+fun List<com.diary.database.NotesWithFolder>.asDomainModel2(): List<Note> {
+    return map {
+        Note(
+            noteId = it.note.noteId,
+            title = it.note.title,
+            content = it.note.content,
+            created = it.note.created,
+            photo = it.note.photo,
+            emotion = it.note.emotion,
+            folderName = it.folder.name,
+            tags = it.tags,
+            tagsCount = it.tags.size.toString() + " tag(s)"
+        )
     }
 }

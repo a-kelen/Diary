@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".tabs.TabCreateImageFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.diary.createnote.CreateNoteViewModel" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Image" />
+        android:weightSum="10"
+        android:background="@color/cardview_dark_background"
+        >
 
-</FrameLayout>
+        <Button
+            android:id="@+id/pickImageGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxWidth="25dp"
+            android:text="Pick image"/>
+
+        <ImageView
+            android:layout_margin="30dp"
+            android:layout_weight="9"
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

@@ -36,7 +36,7 @@ class CreateNoteFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.create_note_fragment,container,false)
         var application = requireNotNull(this.activity).application
-        var dataSource = DiaryDatabase.getInstance(application).noteDao
+        var dataSource = DiaryDatabase.getInstance(application)
         val viewModelFactory =
             CreateNoteVMFactory(dataSource, application)
 
@@ -53,10 +53,10 @@ class CreateNoteFragment : Fragment() {
         }
         tabAdapter =
             TabPagerAdapter(requireActivity().supportFragmentManager)
-        tabAdapter.addFragment(TabCreateSmileFragment(), "Smile")
-        tabAdapter.addFragment(TabCreateFolderFragment(), "Folder")
-        tabAdapter.addFragment(TabCreateTagsFragment(), "Tags")
-        tabAdapter.addFragment(TabCreateImageFragment(), "Image")
+        tabAdapter.addFragment(TabCreateSmileFragment(viewModel), "Smile")
+        tabAdapter.addFragment(TabCreateFolderFragment(viewModel), "Folder")
+        tabAdapter.addFragment(TabCreateTagsFragment(viewModel), "Tags")
+        tabAdapter.addFragment(TabCreateImageFragment(viewModel), "Image")
         binding.viewPagerCreate.adapter = tabAdapter
         binding.tabLayoutCreate.setupWithViewPager(binding.viewPagerCreate)
         binding.tabLayoutCreate.addOnTabSelectedListener( object : TabLayout.OnTabSelectedListener {

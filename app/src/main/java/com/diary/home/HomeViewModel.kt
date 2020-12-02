@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.diary.database.NoteDao
 import com.diary.database.asDomainModel
+import com.diary.database.asDomainModel2
 import com.diary.domain.Note
 import kotlinx.coroutines.*
 import timber.log.Timber
@@ -14,7 +15,7 @@ class HomeViewModel(
 ) : AndroidViewModel(application) {
     val notes = Transformations.map(db.getAllNotes()) {
         Timber.i("Notes count: " + it.count().toString())
-        it.asDomainModel()
+        it.asDomainModel2()
     }
     private val _event = MutableLiveData<Boolean>()
     val  event : LiveData<Boolean>

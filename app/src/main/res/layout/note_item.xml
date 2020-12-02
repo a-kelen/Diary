@@ -6,7 +6,7 @@
     <data>
         <variable
             name="note"
-            type="com.diary.domain.Note" />
+            type="com.diary.domain.Note"/>
     </data>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
@@ -40,9 +40,13 @@
                 android:gravity="center_horizontal"
                 app:valueMonthFormatted="@{note}"
                 android:textAlignment="center"/>
+
             <ImageView
+                app:smileImage="@{note.emotion}"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -83,17 +87,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:text="Folder"/>
+                    android:text="@{note.folderName}"/>
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Folder"/>
+                    android:text="@{note.tagsCount}"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/note_image"
@@ -101,7 +105,7 @@
                 android:adjustViewBounds="true"
                 android:layout_width="match_parent"
                 app:imageUrl="@{note.photo}"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

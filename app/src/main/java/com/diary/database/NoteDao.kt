@@ -1,14 +1,12 @@
 package com.diary.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Update
-import androidx.room.Query
+import androidx.room.*
+
 @Dao
 interface NoteDao {
     @Insert
-    fun insert(note: Note)
+     fun insert(note: Note) : Long
 
     @Update
     fun update(note: Note)
@@ -18,7 +16,7 @@ interface NoteDao {
 
     @Query("DELETE FROM note_table")
     fun clear()
-
+    @Transaction
     @Query("SELECT * FROM note_table")
-    fun getAllNotes(): LiveData<List<Note>>
+    fun getAllNotes(): LiveData<List<NotesWithFolder>>
 }

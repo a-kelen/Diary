@@ -1,22 +1,17 @@
 package com.diary
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LifecycleObserver
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.diary.databinding.ActivityMainBinding
 import timber.log.Timber
+
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
     companion object{
@@ -33,6 +28,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 //            binding.editMessage.setText(savedInstanceState.getString(ARG_PARAM1))
             Timber.i("Data restored2 :" + savedInstanceState.getString("text"))
         }
+
         @Suppress("USUSED_VARIABLE")
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         drawerLayout = binding.drawerLayout

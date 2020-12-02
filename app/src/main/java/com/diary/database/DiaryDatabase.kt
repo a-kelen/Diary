@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities = [Note::class, Tag::class, Folder::class, ArchiveNote::class], version = 3, exportSchema = false)
+@Database(entities = [Note::class, Tag::class, Folder::class, ArchiveNote::class, NoteTagCrossRef::class], version = 6, exportSchema = false)
 abstract class DiaryDatabase : RoomDatabase() {
     abstract val noteDao : NoteDao
     abstract val archiveDao : NoteArchiveDao
+    abstract val folderDao : FolderDao
+    abstract val tagDao: TagDao
     companion object {
         @Volatile
         private lateinit var INSTANCE : DiaryDatabase

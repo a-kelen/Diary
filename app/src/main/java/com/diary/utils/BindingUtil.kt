@@ -1,4 +1,5 @@
 package com.diary.utils
+import android.opengl.Visibility
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -7,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.diary.R
 import com.diary.domain.Note
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -59,12 +61,32 @@ fun TextView.setContentFormated(item : Note?) {
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
-        val imgUri = it.toUri().buildUpon().scheme("https").build()
-        Glide.with(imgView.context)
-            .load(imgUri)
-            .apply(RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image))
-            .into(imgView)
+        if("https" in imgUrl) {
+            val imgUri = it.toUri().buildUpon().scheme("https").build()
+            Glide.with(imgView.context)
+                .load(imgUri)
+                .apply(RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image))
+                .into(imgView)
+        }
+        else {
+            imgView.setImageURI(it.toUri())
+        }
+
+    }
+}
+@BindingAdapter("smileImage")
+fun bindSmile(imgView: ImageView, smile: Int?) {
+    smile?.let {
+        imgView.setImageResource(when(it) {
+            1 -> R.drawable.em1
+            2 -> R.drawable.em2
+            3 -> R.drawable.em3
+            4 -> R.drawable.em4
+            5 -> R.drawable.em5
+            else -> R.drawable.ic_broken_image
+        })
+
     }
 }

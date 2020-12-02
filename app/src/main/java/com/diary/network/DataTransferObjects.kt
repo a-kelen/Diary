@@ -36,6 +36,7 @@ fun NetworkNoteContainer.asDomainModel(): List<Note> {
             content = it.content,
             created = it.created,
             photo = it.photo,
-            emotion = it.emotion)
+            emotion = it.emotion,
+            folderName = "Network")
     }
 }

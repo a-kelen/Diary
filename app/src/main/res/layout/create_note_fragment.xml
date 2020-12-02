@@ -28,6 +28,7 @@
                 android:hint="Title">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:text="@={viewModel.title}"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -38,6 +39,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={viewModel.content}"
                     android:hint="Content"/>
 
             </com.google.android.material.textfield.TextInputLayout>
