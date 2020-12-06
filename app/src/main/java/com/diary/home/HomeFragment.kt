@@ -13,11 +13,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diary.notedetails.NoteAdapter
 import com.diary.R
 import com.diary.database.DiaryDatabase
+import com.diary.database.Folder
 import com.diary.databinding.FragmentHomeBinding
+import com.diary.notedetails.NoteListerner
+import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
@@ -47,13 +51,15 @@ class HomeFragment : Fragment(), LifecycleObserver,
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_home,container,false)
         var application = requireNotNull(this.activity).application
-        var dataSource = DiaryDatabase.getInstance(application).noteDao
+        var dataSource = DiaryDatabase.getInstance(application)
         val viewModelFactory =
             HomeVMFactory(dataSource, application)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(HomeViewModel::class.java)
         val adapter : NoteAdapter =
-            NoteAdapter(this)
+            NoteAdapter(NoteListerner {
+                noteId -> viewModel.onNoteClicked(noteId)
+            })
 
         binding.notes.layoutManager = LinearLayoutManager(this.context)
         binding.notes.setHasFixedSize(true)
@@ -62,7 +68,7 @@ class HomeFragment : Fragment(), LifecycleObserver,
 
         viewModel.notes.observe(this.viewLifecycleOwner, Observer { newList ->
             newList?.let {
-                adapter.submitList(newList )
+                adapter.submitList(newList)
             }
         })
         viewModel.event.observe(this.viewLifecycleOwner, Observer { isUpdated ->
@@ -80,15 +86,48 @@ class HomeFragment : Fragment(), LifecycleObserver,
                 viewModel.doneShowingSnackbar()
             }
         })
+        viewModel.navigateToNote.observe(this.viewLifecycleOwner, Observer {noteId ->
+            noteId?.let {
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNoteDetailsFragment(noteId))
+                viewModel.onNoteNavigated()
+            }
+        })
+
+        viewModel.folderlist.observe(viewLifecycleOwner, object: Observer<List<Folder>> {
+            override fun onChanged(data: List<Folder>?) {
+                data ?: return
+                val chipGroup = binding.folderList
+                val inflator = LayoutInflater.from(chipGroup.context)
+
+                val children = data.map { folder ->
+                    val chip = inflator.inflate(R.layout.folder_chip, chipGroup, false) as Chip
+                    chip.text = folder.name
+                    chip.tag = folder.name
+                    chip.setOnCheckedChangeListener { button, isChecked ->
+                        if (isChecked) {
+                            adapter.submitList(viewModel.notes.value?.filter { x -> x.folderName == button.tag as String })
+                        } else {
+                            adapter.submitList(viewModel.notes.value)
+                        }
+                    }
+                    chip
+                }
+                chipGroup.removeAllViews()
+                for (chip in children) {
+                    chipGroup.addView(chip)
+                }
+            }
+        })
         binding.createBtn.setOnClickListener{
             it.findNavController().navigate(R.id.action_homeFragment_to_createNoteFragment)
         }
+
+
         binding.setLifecycleOwner(this)
         return  binding.root
     }
 
     override fun OnClick(str: String) {
-        Toast.makeText(this.activity, "Data : " + str, Toast.LENGTH_SHORT).show()
         var b = bundleOf("element" to str)
         Navigation.findNavController(binding.notes).navigate(R.id.action_homeFragment_to_noteDetailsFragment, b)
     }

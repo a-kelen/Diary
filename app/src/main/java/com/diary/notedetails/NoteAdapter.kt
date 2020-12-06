@@ -11,7 +11,7 @@ import com.diary.home.ItemClickListerner
 import com.diary.databinding.NoteItemBinding
 
 class NoteAdapter(
-    val itemClickListerner: ItemClickListerner
+    val clickListerner: NoteListerner
 ) : ListAdapter<Note, NoteAdapter.NoteHolder>(
     NoteDiffCallback()
 ) {
@@ -35,7 +35,7 @@ class NoteAdapter(
         val value : Note = getItem(position)
         holder.binding.note = value
         holder.binding.executePendingBindings()
-
+        holder.binding.clickListener = clickListerner
 //        holder.title.text = value.title
 //        holder.content.text = value.content
 //        holder.textView.setOnClickListener {
@@ -51,4 +51,7 @@ class NoteDiffCallback : DiffUtil.ItemCallback<Note>() {
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
         return oldItem.noteId == newItem.noteId
     }
+}
+class NoteListerner(val clickListerner: (noteId: Long) -> Unit) {
+    fun onClick(note: Note) = clickListerner(note.noteId)
 }

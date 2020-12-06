@@ -2,6 +2,7 @@ package com.diary.home
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.diary.database.DiaryDatabase
 import com.diary.database.NoteDao
 import com.diary.database.asDomainModel
 import com.diary.database.asDomainModel2
@@ -10,13 +11,17 @@ import kotlinx.coroutines.*
 import timber.log.Timber
 
 class HomeViewModel(
-    val db : NoteDao,
+    val db : DiaryDatabase,
     application: Application
 ) : AndroidViewModel(application) {
-    val notes = Transformations.map(db.getAllNotes()) {
-        Timber.i("Notes count: " + it.count().toString())
+    val filter = FilterHolder()
+//    private val notes = MutableLiveData<List<Note>>()
+    val notes = Transformations.map(db.noteDao.getAllNotes()) {
         it.asDomainModel2()
     }
+    val folderlist = db.folderDao.getAllFolders()
+
+
     private val _event = MutableLiveData<Boolean>()
     val  event : LiveData<Boolean>
         get() = _event
@@ -27,13 +32,26 @@ class HomeViewModel(
 
     lateinit var initList : ArrayList<Note>
 
+    private val _navigateToNote = MutableLiveData<Long>()
+    val navigateToNote
+        get() = _navigateToNote
+
     init {
         initList = ArrayList()
+
+
     }
 
-    val clearButtonVisible = Transformations.map(notes) {
-        it?.isNotEmpty()
+
+
+    fun onNoteClicked(id: Long){
+        _navigateToNote.value = id
     }
+
+    fun onNoteNavigated() {
+        _navigateToNote.value = null
+    }
+
 
     fun addElement() {
         var n = com.diary.database.Note(title = "Title 1", content = "Content")
@@ -59,7 +77,7 @@ class HomeViewModel(
     private suspend fun clear()
     {
         return withContext(Dispatchers.IO) {
-            db.clear()
+            db.noteDao.clear()
         }
     }
 
@@ -73,5 +91,32 @@ class HomeViewModel(
 
     fun doneShowingSnackbar() {
         _showSnackbarEvent.value = false
+    }
+
+    fun onFilterChanged(filter: String, isChecked: Boolean) {
+        if (this.filter.update(filter, isChecked)) {
+            onQueryChanged()
+        }
+    }
+    private fun onQueryChanged() {
+        viewModelScope.launch {
+//            notes.value =  db.noteDao.getAllNotes().value?.filter { x -> x.note.folderId == filter.currentValue }?.asDomainModel2()
+        }
+    }
+
+     class FilterHolder {
+        var currentValue: String? = null
+            private set
+
+        fun update(changedFilter: String, isChecked: Boolean): Boolean {
+            if (isChecked) {
+                currentValue = changedFilter
+                return true
+            } else if (currentValue == changedFilter) {
+                currentValue = null
+                return true
+            }
+            return false
+        }
     }
 }

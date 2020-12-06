@@ -49,33 +49,68 @@ class TabCreateSmileFragment(val viewModel: CreateNoteViewModel) : Fragment() {
         binding.viewModel = viewModel
         binding.em1.setOnClickListener {
             viewModel.emotion.value = 1
+            alert(1)
         }
         binding.em2.setOnClickListener {
             viewModel.emotion.value = 2
+            alert(2)
         }
         binding.em3.setOnClickListener {
             viewModel.emotion.value = 3
+            alert(3)
         }
         binding.em4.setOnClickListener {
             viewModel.emotion.value = 4
+            alert(4)
         }
         binding.em5.setOnClickListener {
             viewModel.emotion.value = 5
+            alert(5)
         }
-
 
         return binding.root
     }
 
+    fun alert(i: Int){
+        when(i) {
+            1 -> {
+                binding.em1.contentDescription = getString(R.string.selected_emoji)
+                binding.em2.contentDescription = getString(R.string.emoji_button)
+                binding.em3.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+            }
+            2 -> {
+                binding.em1.contentDescription = getString(R.string.emoji_button)
+                binding.em2.contentDescription = getString(R.string.selected_emoji)
+                binding.em3.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+            }
+            3 -> {
+                binding.em1.contentDescription = getString(R.string.emoji_button)
+                binding.em2.contentDescription = getString(R.string.emoji_button)
+                binding.em3.contentDescription = getString(R.string.selected_emoji)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+            }
+            4 -> {
+                binding.em1.contentDescription = getString(R.string.emoji_button)
+                binding.em2.contentDescription = getString(R.string.emoji_button)
+                binding.em3.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.selected_emoji)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+            }
+            5 -> {
+                binding.em1.contentDescription = getString(R.string.emoji_button)
+                binding.em2.contentDescription = getString(R.string.emoji_button)
+                binding.em3.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.emoji_button)
+                binding.em4.contentDescription = getString(R.string.selected_emoji)
+            }
+        }
+    }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TabCreateSmileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
     }
 }

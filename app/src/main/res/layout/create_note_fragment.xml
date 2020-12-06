@@ -14,17 +14,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/pageMargin"
             android:orientation="vertical">
             <com.google.android.material.button.MaterialButton
+                android:contentDescription="@string/save_note"
                 android:onClick="@{() -> viewModel.createNote()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save"/>
             <com.google.android.material.textfield.TextInputLayout
+                android:contentDescription="@string/input_note_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="@dimen/editTextVM"
                 android:hint="Title">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -32,9 +34,10 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
+                android:contentDescription="@string/input_note_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="@dimen/editTextVM"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -52,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical"
-            android:translationY="400dp">
+            android:translationY="@dimen/tabTranslation">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayoutCreate"
@@ -60,6 +63,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.tabs.TabItem
+                    android:contentDescription="Tab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tab1" />
@@ -73,7 +77,7 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerCreate"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="@dimen/tabTranslation"
                 android:background="@color/cardview_light_background" />
         </LinearLayout>
     </RelativeLayout>

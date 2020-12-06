@@ -4,28 +4,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".notedetails.NoteDetailsFragment">
     <data>
+        <import type="androidx.lifecycle.LiveData"/>
         <variable
-            name="viewModel"
-            type="com.diary.notedetails.NoteDetailsViewModel" />
+            name="note"
+            type="LiveData&lt;com.diary.domain.Note>" />
     </data>
-    <LinearLayout
-        android:orientation="horizontal"
+    <ScrollView
         android:layout_width="match_parent"
+        android:isScrollContainer="true"
         android:layout_height="match_parent">
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
 
-        <Button
-            android:id="@+id/button2"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp">
+                <TextView
+                    tools:text="21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:valueDayFormatted="@{note}"
+                    style="@style/dateday"
+                    android:textAlignment="center"/>
+                <TextView
+                    tools:text="Nov."
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:valueMonthFormatted="@{note}"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/dateday"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="@dimen/detailPageEmojiSize"
+                    android:layout_height="@dimen/detailPageEmojiSize"
+                    android:layout_marginHorizontal="@dimen/pageMargin"
+                    android:layout_gravity="right"
+                    app:smileImage="@{note.emotion}"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <com.google.android.material.chip.Chip
+            tools:text="Folder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buzz" />
-
+            android:layout_margin="@dimen/pageMargin"
+            android:text="@{note.folderName}"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detailImageHeight"
+            android:layout_marginHorizontal="@dimen/pageMargin"
+            app:imageUrl="@{note.photo}"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            />
         <TextView
-            android:id="@+id/noteDetail"
+            tools:text="Title"
+            android:layout_marginHorizontal="@dimen/pageMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(viewModel.element)}"/>
+            android:text="@{note.title}"/>
+        <TextView
+            tools:text="Content"
+            android:layout_marginHorizontal="@dimen/pageMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{note.content}"/>
+
 
 
 
     </LinearLayout>
+    </ScrollView>
 </layout>

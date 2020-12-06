@@ -19,3 +19,17 @@ data class NotesWithFolder (
     )
     val tags: List<Tag>
 )
+
+fun NotesWithFolder.asDomainModel(): com.diary.domain.Note {
+    return com.diary.domain.Note(
+        noteId = this.note.noteId,
+        title = this.note.title,
+        created = this.note.created,
+        content = this.note.content,
+        tagsCount = this.tags.size.toString(),
+        tags = this.tags,
+        photo = this.note.photo,
+        folderName = this.folder.name,
+        emotion = this.note.emotion
+    )
+}

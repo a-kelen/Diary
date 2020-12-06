@@ -12,6 +12,7 @@ import androidx.core.content.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.diary.R
+import com.diary.database.DiaryDatabase
 import com.diary.databinding.FragmentNoteDetailsBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,14 +41,14 @@ class NoteDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_note_details,container,false)
-        var res = arguments?.getString("element") ?: "Empty"
-        viewModelFactory = NoteDetailsViewModelFactory(res)
+        var application = requireNotNull(this.activity).application
+        var dataSource = DiaryDatabase.getInstance(application)
+        var res = NoteDetailsFragmentArgs.fromBundle(requireArguments()).noteId
+        viewModelFactory = NoteDetailsViewModelFactory(res, dataSource, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(NoteDetailsViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.button2.setOnClickListener {
-            buzz()
-        }
+        binding.lifecycleOwner = this
+        binding.note = viewModel.element
         return binding.root
     }
     fun buzz() {

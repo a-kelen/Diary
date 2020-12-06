@@ -51,9 +51,8 @@
         android:label="fragment_note_details"
         tools:layout="@layout/fragment_note_details" >
         <argument
-            android:name="element"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:name="noteId"
+            app:argType="long"/>
     </fragment>
     <fragment
         android:id="@+id/createNoteFragment"

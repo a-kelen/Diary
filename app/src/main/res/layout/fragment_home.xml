@@ -11,11 +11,24 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <HorizontalScrollView
+                android:id="@+id/chips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/folder_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:singleLine="true"
+                    android:padding="10dp"/>
+            </HorizontalScrollView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notes"
@@ -23,15 +36,16 @@
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
         </LinearLayout>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/createBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:contentDescription="asd"
-            app:fabCustomSize="80dp"
-            android:backgroundTint="@color/cardview_light_background"
-            />
+            android:layout_margin="@dimen/floatingButtonMargin"
+            app:srcCompat="@drawable/add_icon"
+            app:tint="#333"
+            android:contentDescription="@string/navigate_to_create_note"
+            app:fabCustomSize="@dimen/fabSize" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -20,43 +20,53 @@
             <ImageButton
                 android:id="@+id/em1"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/EmojiButtonHeight"
                 android:src="@drawable/em1"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:padding="10dp"
+                android:contentDescription="@string/emoji_button"
+                android:accessibilityLiveRegion="polite"
                 />
             <ImageButton
                 android:id="@+id/em2"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/EmojiButtonHeight"
                 android:layout_width="match_parent"
                 android:src="@drawable/em2"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/emoji_button"
+                android:accessibilityLiveRegion="polite"
                 />
             <ImageButton
                 android:id="@+id/em3"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/EmojiButtonHeight"
                 android:layout_width="match_parent"
                 android:src="@drawable/em3"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/emoji_button"
+                android:accessibilityLiveRegion="polite"
                 />
             <ImageButton
                 android:id="@+id/em4"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/EmojiButtonHeight"
                 android:layout_width="match_parent"
                 android:src="@drawable/em4"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/emoji_button"
+                android:accessibilityLiveRegion="polite"
                 />
             <ImageButton
                 android:id="@+id/em5"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/EmojiButtonHeight"
                 android:layout_width="match_parent"
                 android:src="@drawable/em5"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/emoji_button"
+                android:accessibilityLiveRegion="polite"
                 />
 
 

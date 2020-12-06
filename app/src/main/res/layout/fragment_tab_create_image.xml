@@ -20,11 +20,10 @@
             android:id="@+id/pickImageGallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxWidth="25dp"
             android:text="Pick image"/>
 
         <ImageView
-            android:layout_margin="30dp"
+            android:layout_margin="@dimen/pickPhotoMargin"
             android:layout_weight="9"
             android:id="@+id/imageView"
             android:layout_width="match_parent"

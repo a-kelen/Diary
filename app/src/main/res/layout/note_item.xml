@@ -7,13 +7,19 @@
         <variable
             name="note"
             type="com.diary.domain.Note"/>
+        <variable
+            name="clickListener"
+            type="com.diary.notedetails.NoteListerner"/>
     </data>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="7dp"
-    android:layout_marginStart="7dp"
-    android:layout_marginTop="7dp">
+    android:layout_marginEnd="@dimen/cardViewMargin"
+    android:layout_marginStart="@dimen/cardViewMargin"
+    android:layout_marginTop="@dimen/cardViewMargin"
+    android:contentDescription="@string/open_current_tab"
+    android:onClick="@{() -> clickListener.onClick(note)}"
+    >
 
     <LinearLayout
         android:orientation="horizontal"
@@ -25,16 +31,18 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="@dimen/blockPadding"
             android:layout_weight="1">
             <TextView
+                tools:text="21"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 app:valueDayFormatted="@{note}"
-                android:textSize="24dp"
+                style="@style/dateday"
                 android:textAlignment="center"/>
             <TextView
+                tools:text="Nov."
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
@@ -52,7 +60,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:padding="@dimen/blockPadding"
             android:weightSum="0"
             android:layout_weight="1">
             <LinearLayout
@@ -60,15 +68,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0">
+
                 <TextView
+                    tools:text="Title"
+                    android:contentDescription="@string/note_title"
+                    android:textAppearance="?textAppearanceHeadline6"
                     android:id="@+id/note_item_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    app:valueTitleFormatted="@{note}"
                     android:layout_marginVertical="4dp"
-                    />
+                    android:gravity="center_horizontal"
+                    app:valueTitleFormatted="@{note}" />
                 <TextView
+                    tools:text="Content"
+                    android:contentDescription="@string/note_content"
                     android:id="@+id/note_item_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,13 +97,16 @@
                 android:layout_weight="25">
 
                 <com.google.android.material.chip.Chip
+                    android:contentDescription="@string/note_s_folder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginHorizontal="@dimen/chipHM"
                     android:text="@{note.folderName}"/>
                 <com.google.android.material.chip.Chip
+                    android:contentDescription="@string/note_tags"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/chipHM"
                     android:text="@{note.tagsCount}"/>
             </LinearLayout>
         </LinearLayout>

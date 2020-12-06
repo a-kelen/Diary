@@ -49,3 +49,5 @@ fun List<com.diary.database.NotesWithFolder>.asDomainModel2(): List<Note> {
         )
     }
 }
+
+

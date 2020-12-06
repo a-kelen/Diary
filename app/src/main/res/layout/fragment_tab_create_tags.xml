@@ -27,19 +27,19 @@
                     android:layout_width="wrap_content"
                     android:text="@={viewModel.tagName}"
                     android:layout_weight="7"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="@dimen/pageMargin"
                     android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/addTagBtn"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="@dimen/chipHM"
                     android:text="Add"/>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/checkBoxList"
-                android:layout_margin="20dp"
+                android:layout_margin="@dimen/pageMargin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>

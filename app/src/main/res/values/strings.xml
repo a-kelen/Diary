@@ -10,4 +10,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigate_to_create_note">Navigate to Create note</string>
+    <string name="open_current_tab">Open current tab</string>
+    <string name="note_title">Note title</string>
+    <string name="note_content">Note content</string>
+    <string name="note_s_folder">Note`s folder</string>
+    <string name="note_tags">Note tags</string>
+    <string name="save_note">Save Note</string>
+    <string name="input_note_title">Input note title</string>
+    <string name="input_note_content">Input note content</string>
+    <string name="selected_emoji">Emoji is selected already</string>
+    <string name="emoji_button">Emoji Button</string>
 </resources>

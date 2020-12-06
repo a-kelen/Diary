@@ -1,11 +1,31 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="fontFamily">@font/aclonica</item>
+        <item name="textAppearanceHeadline6">@style/customHeadLine</item>
     </style>
+    <style name="customHeadLine" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#eee</item>
+    </style>
+    <style name="dateday" parent="customHeadLine">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#eee</item>
+        <item name="fontFamily">@font/aclonica</item>
+    </style>
+    <style name="datemonth" parent="customHeadLine">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#eee</item>
+    </style>
+
+
 
 </resources>
