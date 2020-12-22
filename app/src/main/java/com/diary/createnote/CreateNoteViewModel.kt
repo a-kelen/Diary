@@ -11,7 +11,6 @@ import timber.log.Timber
 import java.util.ArrayList
 
 class CreateNoteViewModel(val db : DiaryDatabase, application: Application) : AndroidViewModel(application) {
-
     private val _event = MutableLiveData<Boolean>()
     val  NoteCretedEvent : LiveData<Boolean>
         get() = _event
@@ -21,8 +20,7 @@ class CreateNoteViewModel(val db : DiaryDatabase, application: Application) : An
     private val _event_created_tag = MutableLiveData<Boolean>()
     val  TagCretedEvent : LiveData<Boolean>
         get() = _event_created_tag
-
-
+    
     val title = MutableLiveData<String>()
     val content = MutableLiveData<String>()
 
