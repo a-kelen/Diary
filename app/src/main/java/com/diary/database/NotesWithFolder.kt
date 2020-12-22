@@ -11,7 +11,7 @@ data class NotesWithFolder (
         parentColumn = "folderId",
         entityColumn = "folderId"
     )
-    val folder: Folder,
+    val folder: Folder?,
     @Relation(
     parentColumn = "noteId",
     entityColumn = "tagId",
@@ -29,7 +29,7 @@ fun NotesWithFolder.asDomainModel(): com.diary.domain.Note {
         tagsCount = this.tags.size.toString(),
         tags = this.tags,
         photo = this.note.photo,
-        folderName = this.folder.name,
+        folderName = this.folder?.name,
         emotion = this.note.emotion
     )
 }

@@ -49,7 +49,7 @@ class CreateNoteViewModel(val db : DiaryDatabase, application: Application) : An
                 title = this.title.value,
                 content = this.content.value,
                 emotion = this.emotion.value !! -1,
-                folderId = this.selectedFolder.value !! -1,
+                folderId = this.selectedFolder.value !! + (1).toLong() !! -1,
                 photo = imageUri.value.toString()
             )
             viewModelScope.launch {

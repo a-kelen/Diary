@@ -43,7 +43,7 @@ fun List<com.diary.database.NotesWithFolder>.asDomainModel2(): List<Note> {
             created = it.note.created,
             photo = it.note.photo,
             emotion = it.note.emotion,
-            folderName = it.folder.name,
+            folderName = it.folder?.name,
             tags = it.tags,
             tagsCount = it.tags.size.toString() + " tag(s)"
         )
