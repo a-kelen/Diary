@@ -20,7 +20,7 @@ class CreateNoteViewModel(val db : DiaryDatabase, application: Application) : An
     private val _event_created_tag = MutableLiveData<Boolean>()
     val  TagCretedEvent : LiveData<Boolean>
         get() = _event_created_tag
-    
+    //change
     val title = MutableLiveData<String>()
     val content = MutableLiveData<String>()
 
